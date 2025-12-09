@@ -1,0 +1,22 @@
+{
+	"name": "auroralog",
+	"version": "0.2.0",
+	"description": "random logging library",
+	"license": "ISC",
+	"author": "dr3ngr",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc -p tsconfig.json",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.2",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.15"
+	}
+}
