@@ -2,7 +2,11 @@
 	"name": "auroralog",
 	"version": "0.2.0",
 	"description": "random logging library",
-	"license": "ISC",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/snigdhcinu/auroraLog"
+	},
 	"author": "dr3ngr",
 	"type": "module",
 	"main": "dist/index.js",
