@@ -28,9 +28,37 @@ export interface ConsoleTransportOptions {
   console?: ConsoleLike;
 }
 
+export type LoggerContext = LogMetadata;
+
+export interface RedactionOptions {
+  keys?: string[];
+  redactionValue?: string;
+  caseInsensitive?: boolean;
+  maxDepth?: number;
+  maxKeys?: number;
+}
+
+export interface GlobalErrorHandlingOptions {
+  captureUncaughtException?: boolean;
+  captureUnhandledRejection?: boolean;
+  exitOnFatal?: boolean;
+  exitDelayMs?: number;
+}
+
+export type ConsoleMethod = 'log' | 'info' | 'warn' | 'error' | 'debug' | 'trace';
+
+export interface PatchConsoleOptions {
+  logger: Logger;
+  methods?: ConsoleMethod[];
+  map?: Partial<Record<ConsoleMethod, LogLevelName>>;
+}
+
 export interface LoggerOptions {
   level?: LogLevelName;
   console?: ConsoleTransportOptions;
+  context?: LoggerContext;
+  redaction?: RedactionOptions;
+  globalErrorHandling?: GlobalErrorHandlingOptions;
 }
 
 export interface Logger {
@@ -40,5 +68,6 @@ export interface Logger {
   warn: (message: string, metadata?: LogMetadata) => void;
   error: (message: string, metadata?: LogMetadata) => void;
   fatal: (message: string, metadata?: LogMetadata) => void;
+  withContext: (context: LoggerContext) => Logger;
 }
 

@@ -10,12 +10,12 @@ v0.1 — Core Structured Logger (MVP)
 - Acceptance signals: JSON shape contract documented; level filtering fast-path benchmark (disabled level adds negligible overhead); logger must never throw.
 
 v0.2 — Context & Redaction
-- logger.withContext to attach request/user IDs and merge into entries.
-- Redaction rules (configurable keys like secrets, tokens) applied before dispatch.
-- Global error capture hooks: uncaughtException, unhandledRejection → route through logger.
+- logger.withContext to attach request/user IDs and merge into entries (immutable, manual scoping).
+- Redaction rules (configurable keys like secrets, tokens) with case-insensitive matching, circular reference safety, and traversal limits.
+- Global error capture hooks: uncaughtException, unhandledRejection → route through logger (Node-only, idempotent).
 - DX: lightweight helper to patch console (console.patch() optional).
 - Tests for context merging, redaction correctness, and global error handling.
-- Acceptance signals: default redaction keys list; context merge precedence defined (entry metadata overrides context or vice versa); logger remains non-throwing under malformed metadata.
+- Acceptance signals: default redaction keys list; context merge precedence defined (entry metadata overrides context); immutability guarantees; circular reference safety; logger remains non-throwing under malformed metadata.
 
 v0.3 — File + Memory Transports
 - File transport: append-only with size/time rotation; optional compression stub.
@@ -39,6 +39,7 @@ v0.5 — Formatting & Customization
 - Performance guardrails: avoid work when level disabled; microbench harness for formatter/transports.
 - Tests: formatter correctness, extension contracts, perf budgets.
 - Choose minimal templating syntax and document how redaction runs relative to templating.
+- Enhanced redaction matching: path-based redaction (e.g., "headers.authorization") and pattern-based redaction (RegExp matching) as optional advanced features.
 
 v0.6 — Browser Support & Tree-Shakeable Build
 - Browser bundle with tree-shaking-friendly exports; adapt transports (console, HTTP only).
